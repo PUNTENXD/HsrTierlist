@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TierList</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo"><a href="#"><img src="gambar/logo Hrs.png" alt="" height="195" ></a>
+               
+            </div>
+            <ul class="links">
+                <li> <a href="Home.html">Home</a></li>
+                <li> <a href="Char.html">Character</a></li>
+                <li> <a href="TierList.html" class="active">TierList</a></li>
+                <li> <a href="TopUp.html">Topup</a></li>
+            </ul>
+            <a href="" class="action_btn">Get Started</a>
+            <div class="toggle_btn">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </div>
+    
+        <div class="dropdown_menu">
+            <li> <a href="Home.html">Home</a></li>
+            <li> <a href="Char.html">Character</a></li>
+            <li> <a href="TierList.html" class="active">TierList</a></li>
+            <li> <a href="TopUp.html">Topup</a></li>
+            <li><a href="" class="action_btn">Get Started</a></li>
+        </div>
+    </header>
+
+
+
+    <script>
+        const toggleBtn = document.querySelector('.toggle_btn')
+        const toggleBtnIcon = document.querySelector('.toggle_btn i')
+        const dropDownMenu = document.querySelector('.dropdown_menu')
+    
+        toggleBtn.onclick = function () {
+            dropDownMenu.classList.toggle('open')
+            const isOpen = dropDownMenu.classList.contains('open')
+    
+            toggleBtnIcon.classList = isOpen
+                ? 'fa-solid fa-xmark'
+                : 'fa-solid fa-bars'
+        }
+        window.onscroll = function () {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        };
+    
+    
+    
+    </script>
+    
+
+
+        <br> <br> <br><br><br><br><br><br><br><br><br><br><br><br><br>
+        
+
+
+
+        <br><br><br><br><br><br><br><br><br><br><br>
+    <form action="">
+        <fieldset>
+            <legend>Tier SS</legend>
+            <table>
+                <tr>
+                    <td>
+                        <img src="gambar/Acheron.jpeg" alt="" width="230px" height="250px
+                        ">
+                    </td> 
+                    <td>
+                        <img src="gambar/Aventurine.jpeg" alt="" width="230px" height="250px">
+                    </td>
+                    <td>
+                        <img src="gambar/Ruan_mei.jpeg" alt="" width="230px" height="250px">
+                    </td>
+                   
+
+
+                </tr>
+            </table>
+        </fieldset>
+    </form>
+    <form action="">
+        <fieldset>
+            <legend>Tier S</legend>
+            <table>
+                <tr>
+                    <td>
+                        <img src="gambar/caelus.jpeg" alt="" width="230px" height="250px">
+                    </td>
+                    <td>
+                        <img src="gambar/Sparkle.jpeg" alt="" width="230px" height="250px">
+                    </td>
+                    <td>
+                        <img src="gambar/Firefly.jpeg" alt="" width="230px" height="250px">
+                    </td>
+                    <td>
+                        <img src="gambar/Gallagher.jpeg" alt="" width="230px" height="250px">
+                    </td>
+                    <td>
+                        <img src="gambar/Jingliu.jpeg" alt="" width="230px" height="250px">
+                    </td>
+                    <td>
+                        <img src="gambar/Robin.jpeg" alt="" width="230px" height="250px">
+                    </td>
+                    <td></td>
+                </tr>
+            </table>
+        </fieldset>
+    </form>
+    <form action="">
+        <fieldset>
+            <legend>Tier A</legend>
+            <table>
+                <tr>
+                    <td>
+                        <img src="gambar/blade.jpeg" alt="" width="230px" height="250px">
+                    </td>
+
+
+                </tr>
+            </table>
+        </fieldset>
+    </form>
+   <form action="">
+        <fieldset>
+            <legend>Tier B</legend>
+            <table>
+                <tr>
+                    <td>
+                        <img src="gambar/welt.jpeg" alt="" width="230px" height="250px">
+                    </td>
+
+                    
+                </tr>
+            </table>
+        </fieldset>
+    </form>
+
+   
+</body>
+</html>

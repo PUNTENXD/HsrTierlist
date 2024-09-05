@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TopUp</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo"><a href="#"><img src="gambar/logo Hrs.png" alt="" height="195" ></a>
+               
+            </div>
+            <ul class="links">
+                <li> <a href="Home.html">Home</a></li>
+                <li> <a href="Char.html">Character</a></li>
+                <li> <a href="TierList.html">TierList</a></li>
+                <li> <a href="TopUp.html" class="active">Topup</a></li>
+            </ul>
+            <a href="" class="action_btn">Get Started</a>
+            <div class="toggle_btn">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </div>
+    
+        <div class="dropdown_menu">
+            <li> <a href="Home.html">Home</a></li>
+            <li> <a href="Char.html">Character</a></li>
+            <li> <a href="TierList.html">TierList</a></li>
+            <li> <a href="TopUp.html" class="active">Topup</a></li>
+            <li><a href="" class="action_btn">Get Started</a></li>
+        </div>
+    </header>
+       </header>
+
+
+       <script>
+        const toggleBtn = document.querySelector('.toggle_btn')
+        const toggleBtnIcon = document.querySelector('.toggle_btn i')
+        const dropDownMenu = document.querySelector('.dropdown_menu')
+    
+        toggleBtn.onclick = function () {
+            dropDownMenu.classList.toggle('open')
+            const isOpen = dropDownMenu.classList.contains('open')
+    
+            toggleBtnIcon.classList = isOpen
+                ? 'fa-solid fa-xmark'
+                : 'fa-solid fa-bars'
+        }
+        window.onscroll = function () {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        };
+    
+    
+    
+    </script>
+    
+
+    
+</body>
+</html>
