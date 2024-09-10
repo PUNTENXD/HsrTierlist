@@ -4,16 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TopUp</title>
+
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lacquer&display=swap">
+
+    <link rel="stylesheet" href="">
+
+
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
         <div class="navbar">
-            <div class="logo"><a href="#"><img src="gambar/logo Hrs.png" alt="" height="195" ></a>
+            <div class="logo"><a href="#">
+                <img src="gambar/logo Hrs.png" alt=""  ></a>
                
             </div>
             <ul class="links">
-                <li> <a href="index.html">Home</a></li>
+                <li> <a href="Home.html">Home</a></li>
                 <li> <a href="Char.html">Character</a></li>
                 <li> <a href="TierList.html">TierList</a></li>
                 <li> <a href="TopUp.html" class="active">Topup</a></li>
@@ -25,38 +37,200 @@
         </div>
     
         <div class="dropdown_menu">
-            <li> <a href="index.html">Home</a></li>
+            <li> <a href="Home.html">Home</a></li>
             <li> <a href="Char.html">Character</a></li>
             <li> <a href="TierList.html">TierList</a></li>
             <li> <a href="TopUp.html" class="active">Topup</a></li>
             <li><a href="" class="action_btn">Get Started</a></li>
         </div>
     </header>
-       </header>
+    
+    
+
+<div class="body">
+
+    <div class="header">
+        <p class="logo1">TOPUP</p>
+        <div class="cart"><i class="fas fa-cart-shopping"></i><p id="count">0</p></div>
+    </div>
+
+    <div class="form-container">
+        <h2 class="text-id">Masukkan User ID dan Nama Server</h2>
+        <input class="input-id" type="text" id="userID" placeholder="Masukkan User ID">
+       
+        <select class="input-id1" id="server">
+            <option value="Jepang">Jepang</option>
+            <option value="Asia">Asia</option>
+            <option value="SEA">SEA</option>
+        </select>
+    <button class="buybtn" id="buyBtn">Beli</button>
+    </div>
+
+    <div class="container1">
+        <div id="root"></div>
+        <div class="sidebar">
+            <div class="head1"><p>Keranjang</p></div>
+            <div id="cartItem">Keranjang kosong</div>
+            <div class="foot1">
+                <h3>Total</h3>
+                <h2 class="total" id="total">Rp 0.000</h2>
+            </div>
+        </div>
+    </div>
+
+    <!-- Popup Modal untuk konfirmasi TopUp -->
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span id="closePopup" class="close">&times;</span>
+            <h2>Konfirmasi Pembelian</h2>
+            <p><strong>ID:</strong> <span id="confirmUserID"></span></p>
+            <p><strong>Server:</strong> <span id="confirmServer"></span></p>
+            <p><strong>Total Pembayaran:</strong> <span id="confirmTopup"></span></p>
+            <button class="buybtn" id="submitBtn">Konfirmasi</button>
+        </div>
+    </div>
+
+<script>
+// JavaScript Keranjang
+const product = [
+    { id: 0, image: 'gambar/Item_Oneiric_Shard.png', title: '60 Oneiric Shard', price: 15 },
+    { id: 1, image: 'gambar/Item_Oneiric_Shard.png', title: '330 Oneiric Shard', price: 72 },
+    { id: 2, image: 'gambar/Item_Oneiric_Shard.png', title: '1090 Oneiric Shard', price: 225 },
+    { id: 3, image: 'gambar/Item_Express_Supply_Pass.png', title: 'Express Supply Pass', price: 72 }
+];
+
+let cart = [];
+let i = 0;
+const categories = [...new Set(product.map(item => item))];
+document.getElementById('root').innerHTML = categories.map(item => {
+    const { image, title, price } = item;
+    return (
+        `<div class='box1'>
+            <div class='img-box1'><img class='images1' src=${image}></img></div>
+            <div class='bottom'>
+                <p>${title}</p><h2 class="h2p">Rp ${price}.000</h2>` +
+        `<button class="buybtn" onclick='addtocart(${i++})'>Beli</button></div></div>`
+    );
+}).join('');
+
+function addtocart(a) { 
+    cart.push({...categories[a]}); 
+    displaycart(); 
+}
+
+function delElement(a) { 
+    cart.splice(a, 1); 
+    displaycart(); 
+}
+
+function displaycart() {
+    let j = 0, total = 0;
+    document.getElementById('count').innerHTML = cart.length;
+    if (cart.length === 0) {
+        document.getElementById('cartItem').innerHTML = 'Keranjang Kosong';
+        document.getElementById('total').innerHTML = 'Rp 0.000';
+    } else {
+        document.getElementById('cartItem').innerHTML = cart.map((item) => {
+            const { image, title, price } = item;
+            total += price;
+            document.getElementById('total').innerHTML = 'Rp ' + total + '.000';
+            return (
+                `<div class='cart-item'>
+                    <div class='row-img'><img class='rowimg' src=${image}></div>
+                    <p style='font-size:12px;'>${title}</p>
+                    <h2 style='font-size:15px;'>Rp ${price}.000</h2>
+                    <i class='fas fa-trash' onclick='delElement(${j++})'></i>
+                </div>`
+            );
+        }).join('');
+    }
+}
+
+// Fungsi untuk menampilkan popup konfirmasi topup
+document.getElementById('buyBtn').addEventListener('click', function () {
+    const userID = document.getElementById('userID').value;
+    const server = document.getElementById('server').value;
+    let totalPembayaran = document.getElementById('total').textContent;
+    if (cart.length === 0) {
+        alert('Keranjang Anda kosong, silakan tambahkan item!');
+        return;
+    }
+    if (userID === '') {
+        alert('Mohon masukkan User ID!');
+        return;
+    }
+    
+    // Tampilkan data di popup
+    document.getElementById('confirmUserID').textContent = userID;
+    document.getElementById('confirmServer').textContent = server;
+    document.getElementById('confirmTopup').textContent = totalPembayaran;
+    document.getElementById('popup').style.display = 'block';
+});
+
+// Fungsi untuk menutup popup
+document.getElementById('closePopup').addEventListener('click', function () {
+    document.getElementById('popup').style.display = 'none';
+});
+
+// Fungsi untuk konfirmasi topup dan reset form
+document.getElementById('submitBtn').addEventListener('click', function () {
+    alert('TopUp berhasil!');
+    // Reset ID pengguna dan server
+    document.getElementById('userID').value = '';
+    document.getElementById('server').selectedIndex = 0;
+    cart = []; // Kosongkan keranjang setelah topup berhasil
+    displaycart(); // Update tampilan keranjang
+    document.getElementById('popup').style.display = 'none';
+});
+
+document.querySelector('.cart').innerHTML = '<i class="fas fa-cart-shopping"></i><p id="count">0</p>';
+</script>
 
 
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+       
        <script>
-        const toggleBtn = document.querySelector('.toggle_btn')
-        const toggleBtnIcon = document.querySelector('.toggle_btn i')
-        const dropDownMenu = document.querySelector('.dropdown_menu')
-    
-        toggleBtn.onclick = function () {
-            dropDownMenu.classList.toggle('open')
-            const isOpen = dropDownMenu.classList.contains('open')
-    
-            toggleBtnIcon.classList = isOpen
-                ? 'fa-solid fa-xmark'
-                : 'fa-solid fa-bars'
+    const toggleBtn = document.querySelector('.toggle_btn')
+    const toggleBtnIcon = document.querySelector('.toggle_btn i')
+    const dropDownMenu = document.querySelector('.dropdown_menu')
+
+    toggleBtn.onclick = function () {
+        dropDownMenu.classList.toggle('open')
+        const isOpen = dropDownMenu.classList.contains('open')
+
+        toggleBtnIcon.classList = isOpen
+            ? 'fa-solid fa-xmark' 
+            : 'fa-solid fa-bars';
+    }
+
+
+    window.onscroll = function () {
+        const navbar = document.querySelector('.navbar');
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
         }
-        window.onscroll = function () {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        };
+    };
+
+
     
+    
+
+
     
     
     </script>
